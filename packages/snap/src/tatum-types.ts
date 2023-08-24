@@ -1,4 +1,4 @@
-export type TatumTransaction = {
+export type RavencoinTransaction = {
   blockNumber: number;
   fee: string;
   hash: string;
@@ -32,7 +32,7 @@ export type TatumTransaction = {
   witnessHash: string;
 };
 
-export type TatumUtxo = {
+export type RavencoinUtxo = {
   address: string;
   chain: string;
   index: number;
@@ -40,7 +40,7 @@ export type TatumUtxo = {
   value: number;
 };
 
-export type TatumFees = {
+export type RavencoinFees = {
   fast: number;
   medium: number;
   slow: number;
@@ -48,7 +48,7 @@ export type TatumFees = {
   time: string;
 };
 
-export type TatumBalance = {
+export type RavencoinBalance = {
   incoming: string;
   outgoing: string;
   incomingPending: string;
