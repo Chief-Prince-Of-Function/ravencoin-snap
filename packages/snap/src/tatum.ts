@@ -1,4 +1,4 @@
-import { API_KEY } from './api-config';
+import { API_KEY } from './ravencoin-config';
 import {
   BroadcastTransactionResponse,
   GetRawTransactionResponse,
@@ -6,7 +6,7 @@ import {
   TatumFees,
   TatumTransaction,
   TatumUtxo,
-} from './api-types';
+} from './ravencoin-types';
 
 const tatumRequest = async <T = any>(
   path: string,
@@ -25,7 +25,7 @@ const tatumRequest = async <T = any>(
     },
   };
 
-  const response = await fetch(`https://api.tatum.io${path}`, requestParams);
+  const response = await fetch(`https://api.ravencoin.org${path}`, requestParams);
 
   const data = await response.json();
   return data;
@@ -33,37 +33,37 @@ const tatumRequest = async <T = any>(
 
 export const getAllTxnsForAddress = (
   address: string,
-): Promise<TatumTransaction[]> => {
-  return tatumRequest<TatumTransaction[]>(
+): Promise<RavencoinTransaction[]> => {
+  return ravencoinRequest<RavencoinTransaction[]>(
     `/v3/dogecoin/transaction/address/${address}?pageSize=50`,
   );
 };
 
 export const getBalanceForAddress = (
   address: string,
-): Promise<TatumBalance> => {
-  return tatumRequest<TatumBalance>(`/v3/dogecoin/address/balance/${address}`);
+): Promise<RavencoinBalance> => {
+  return ravencoinRequest<RavencoinBalance>(`/v3/dogecoin/address/balance/${address}`);
 };
 
-export const getTxByHash = (txHash: string): Promise<TatumTransaction> => {
-  return tatumRequest<TatumTransaction>(`/v3/dogecoin/transaction/${txHash}`);
+export const getTxByHash = (txHash: string): Promise<RavencoinTransaction> => {
+  return ravencoinRequest<RavencoinTransaction>(`/v3/dogecoin/transaction/${txHash}`);
 };
 
 export const getUtxosForValue = (
   address: string,
   value: number,
-): Promise<TatumUtxo[]> => {
-  return tatumRequest<TatumUtxo[]>(
+): Promise<RavencoinUtxo[]> => {
+  return ravencoinRequest<RavencoinUtxo[]>(
     `/v3/data/utxos?chain=doge-testnet&address=${address}&totalValue=${value}`,
   );
 };
 
-export const getFees = (): Promise<TatumFees> => {
-  return tatumRequest<TatumFees>('/v3/blockchain/fee/DOGE');
+export const getFees = (): Promise<RavencoinFees> => {
+  return ravencoinRequest<RavencoinFees>('/v3/blockchain/fee/DOGE');
 };
 
 export const getTransactionHex = async (txHash: string): Promise<string> => {
-  const response = await tatumRequest<GetRawTransactionResponse>(
+  const response = await ravencoinRequest<GetRawTransactionResponse>(
     '/v3/blockchain/node/doge-testnet',
     {
       method: 'POST',
@@ -84,7 +84,7 @@ export const getTransactionHex = async (txHash: string): Promise<string> => {
 export const broadcastSignedTransaction = (
   txData: string,
 ): Promise<BroadcastTransactionResponse> => {
-  return tatumRequest<BroadcastTransactionResponse>('/v3/dogecoin/broadcast', {
+  return ravencoinRequest<BroadcastTransactionResponse>('/v3/dogecoin/broadcast', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
