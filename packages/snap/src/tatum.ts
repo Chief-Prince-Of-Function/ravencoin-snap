@@ -1,4 +1,4 @@
-import { API_KEY } from './tatum-config';
+import { API_KEY } from './api-config';
 import {
   BroadcastTransactionResponse,
   GetRawTransactionResponse,
@@ -6,7 +6,7 @@ import {
   TatumFees,
   TatumTransaction,
   TatumUtxo,
-} from './tatum-types';
+} from './api-types';
 
 const tatumRequest = async <T = any>(
   path: string,
