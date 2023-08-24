@@ -2,13 +2,13 @@ import { API_KEY } from './ravencoin-config';
 import {
   BroadcastTransactionResponse,
   GetRawTransactionResponse,
-  TatumBalance,
-  TatumFees,
-  TatumTransaction,
-  TatumUtxo,
+  Ravencoinalance,
+  RavencoinFees,
+  RavencoinTransaction,
+  RavencoinUtxo,
 } from './ravencoin-types';
 
-const tatumRequest = async <T = any>(
+const ravencoinRequest = async <T = any>(
   path: string,
   customParams: RequestInit = {},
 ): Promise<T> => {
