@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
-  "description": "A snap to manage Dogecoin assets",
-  "proposedName": "Dogecoin Snap",
+  "description": "A snap to manage Ravencoin assets",
+  "proposedName": "Ravencoin Snap",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
@@ -12,7 +12,7 @@
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "@ziad-saab/dogecoin-snap",
+        "packageName": "@Chief-Prince-Of-Function/ravencoin-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }
