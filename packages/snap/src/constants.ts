@@ -1,1 +1,1 @@
-export const SATOSHI_TO_DOGE = 100_000_000;
+export const SATOSHI_TO_RVN = 100_000_000;
