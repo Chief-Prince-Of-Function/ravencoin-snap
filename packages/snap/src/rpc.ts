@@ -9,23 +9,23 @@ import {
   getFees,
   getTransactionHex,
   getUtxosForValue,
-} from './tatum';
-import { BroadcastTransactionResponse, TatumTransaction } from './tatum-types';
-import { SATOSHI_TO_DOGE } from './constants';
+} from './raven';
+import { BroadcastTransactionResponse, RavenTransaction } from './raven-types';
+import { SATOSHI_TO_RVN } from './constants';
 import { getAccount } from './private-key';
 import { MakeTransactionParams } from './types';
 
-const dogecoinFormat = coininfo.dogecoin.test.toBitcoinJS();
-const dogecoinNetwork = {
-  messagePrefix: `\x19${dogecoinFormat.name} Signed Message:\n`,
+const ravencoinFormat = coininfo.ravencoin.toBitcoinJS();
+const ravencoinNetwork = {
+  messagePrefix: `\x19${ravencoinFormat.name} Signed Message:\n`,
   bech32: '',
   bip32: {
-    public: dogecoinFormat.bip32.public,
-    private: dogecoinFormat.bip32.private,
+    public: ravencoinFormat.bip32.public,
+    private: ravencoinFormat.bip32.private,
   },
-  pubKeyHash: dogecoinFormat.pubKeyHash,
-  scriptHash: dogecoinFormat.scriptHash,
-  wif: dogecoinFormat.wif,
+  pubKeyHash: ravencoinFormat.pubKeyHash,
+  scriptHash: ravencoinFormat.scriptHash,
+  wif: ravencoinFormat.wif,
 };
 
 /**
@@ -36,7 +36,7 @@ export const getAddress = async (): Promise<string> => {
 
   const { address } = payments.p2pkh({
     pubkey: Buffer.from(account.compressedPublicKeyBytes),
-    network: dogecoinNetwork,
+    network: ravencoinNetwork,
   });
 
   if (!address) {
@@ -84,7 +84,7 @@ export const makeTransaction = async ({
   toAddress,
   amountInSatoshi,
 }: MakeTransactionParams): Promise<BroadcastTransactionResponse> => {
-  const amountInDoge = amountInSatoshi / SATOSHI_TO_DOGE;
+  const amountInRaven = amountInSatoshi / SATOSHI_TO_RVN;
   const confirmationResponse = await snap.request({
     method: 'snap_dialog',
     params: {
@@ -92,8 +92,8 @@ export const makeTransaction = async ({
       content: panel([
         heading('Confirm transaction'),
         divider(),
-        text('Send the following amount in DOGE:'),
-        copyable(amountInDoge.toString()),
+        text('Send the following amount in RVN:'),
+        copyable(amountInRaven.toString()),
         text('To the following address:'),
         copyable(toAddress),
       ]),
@@ -105,7 +105,7 @@ export const makeTransaction = async ({
   }
 
   const psbt = new Psbt({
-    network: dogecoinNetwork,
+    network: ravencoinNetwork,
   });
 
   const account = await getAccount();
