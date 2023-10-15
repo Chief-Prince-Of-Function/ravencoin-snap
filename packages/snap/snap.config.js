@@ -26,7 +26,7 @@ module.exports = {
       })
       .transform(
         envify({
-          TATUM_API_KEY: process.env.TATUM_API_KEY,
+          RAVEN_API_KEY: process.env.RAVEN_API_KEY,
         }),
       );
   },
