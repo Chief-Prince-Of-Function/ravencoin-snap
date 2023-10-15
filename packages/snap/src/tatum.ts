@@ -35,18 +35,18 @@ export const getAllTxnsForAddress = (
   address: string,
 ): Promise<RavencoinTransaction[]> => {
   return ravencoinRequest<RavencoinTransaction[]>(
-    `/v3/dogecoin/transaction/address/${address}?pageSize=50`,
+    `/v3/ravencoin/transaction/address/${address}?pageSize=50`,
   );
 };
 
 export const getBalanceForAddress = (
   address: string,
 ): Promise<RavencoinBalance> => {
-  return ravencoinRequest<RavencoinBalance>(`/v3/dogecoin/address/balance/${address}`);
+  return ravencoinRequest<RavencoinBalance>(`/v3/ravencoin/address/balance/${address}`);
 };
 
 export const getTxByHash = (txHash: string): Promise<RavencoinTransaction> => {
-  return ravencoinRequest<RavencoinTransaction>(`/v3/dogecoin/transaction/${txHash}`);
+  return ravencoinRequest<RavencoinTransaction>(`/v3/ravencoin/transaction/${txHash}`);
 };
 
 export const getUtxosForValue = (
@@ -54,17 +54,17 @@ export const getUtxosForValue = (
   value: number,
 ): Promise<RavencoinUtxo[]> => {
   return ravencoinRequest<RavencoinUtxo[]>(
-    `/v3/data/utxos?chain=doge-testnet&address=${address}&totalValue=${value}`,
+    `/v3/data/utxos?chain=rvn-address=${address}&totalValue=${value}`,
   );
 };
 
 export const getFees = (): Promise<RavencoinFees> => {
-  return ravencoinRequest<RavencoinFees>('/v3/blockchain/fee/DOGE');
+  return ravencoinRequest<RavencoinFees>('/v3/blockchain/fee/RVN');
 };
 
 export const getTransactionHex = async (txHash: string): Promise<string> => {
   const response = await ravencoinRequest<GetRawTransactionResponse>(
-    '/v3/blockchain/node/doge-testnet',
+    '/v3/blockchain/node/rvn',
     {
       method: 'POST',
       headers: {
@@ -84,7 +84,7 @@ export const getTransactionHex = async (txHash: string): Promise<string> => {
 export const broadcastSignedTransaction = (
   txData: string,
 ): Promise<BroadcastTransactionResponse> => {
-  return ravencoinRequest<BroadcastTransactionResponse>('/v3/dogecoin/broadcast', {
+  return ravencoinRequest<BroadcastTransactionResponse>('/v3/ravencoin/broadcast', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
