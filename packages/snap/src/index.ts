@@ -11,16 +11,16 @@ export * from './rpc-types';
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
-    case 'doge_getAddress':
+    case 'raven_getAddress':
       return getAddress();
 
-    case 'doge_getTransactions':
+    case 'raven_getTransactions':
       return getTransactions();
 
-    case 'doge_getBalance':
+    case 'raven_getBalance':
       return getBalance();
 
-    case 'doge_makeTransaction':
+    case 'raven_makeTransaction':
       assertIsMakeTransactionParams(request.params);
       return makeTransaction(request.params);
 
