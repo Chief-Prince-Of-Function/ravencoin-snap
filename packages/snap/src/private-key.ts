@@ -5,16 +5,16 @@ import { BIP44Node, getBIP44AddressKeyDeriver } from '@metamask/key-tree';
  * The path of the account is m/44'/1'/0'/0/0.
  */
 export const getAccount = async (): Promise<BIP44Node> => {
-  const dogecoinTestnetNode = await snap.request({
+  const ravencoinNode = await snap.request({
     method: 'snap_getBip44Entropy',
     params: {
-      coinType: 1, // 1 is for all Testnets
+      coinType: 175, // 1 is for all Testnets
     },
   });
 
-  const deriveDogecoinTestnetPrivateKey = await getBIP44AddressKeyDeriver(
-    dogecoinTestnetNode,
+  const deriveRavencoinPrivateKey = await getBIP44AddressKeyDeriver(
+    ravencoinNode,
   );
 
-  return deriveDogecoinTestnetPrivateKey(0);
+  return deriveRavencoinPrivateKey(0);
 };
